@@ -78,4 +78,12 @@ public class Main {
         array1.removeAll(array2);
         return array1.size();
     }
+
+    private static Image mergeTwoVerticalImages(Image firstImage, Image secondImage) {
+        HashSet<String> bothListsTags = new HashSet<>();
+        bothListsTags.addAll(firstImage.getTags());
+        bothListsTags.addAll(secondImage.getTags());
+
+        return new Image('H', bothListsTags.size(), new ArrayList<>(bothListsTags));
+    }
 }
