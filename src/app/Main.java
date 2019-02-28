@@ -1,5 +1,3 @@
-package app;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -18,6 +16,7 @@ public class Main {
         int currentCounter = 0;
         List<Image> pics = new ArrayList<>();
         List<Image> slideshow = new ArrayList<>();
+        Map<String, Integer> priorities = new HashMap<>();
 
         URL path = Main.class.getResource("../files/a_example.txt");
         File file = new File(path.getPath());
@@ -25,6 +24,7 @@ public class Main {
 
         int numberOfPictures = Integer.valueOf(scanner.nextLine().split(" ")[0]);
 
+        int priority = 0;
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] s = line.split(" ");
@@ -35,6 +35,12 @@ public class Main {
             Image img = new Image(orient, Integer.valueOf(numberOfTags), currentTags,
                     Collections.singletonList(currentCounter++), Collections.emptyList());
             pics.add(img);
+
+            for(String tag : img.getTags()) {
+                if(!priorities.containsKey(tag)) {
+                    priorities.put(tag, priority++);
+                }
+            }
         }
 
         Image firstVerticalPic = null;
