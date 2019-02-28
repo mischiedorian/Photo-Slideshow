@@ -3,11 +3,9 @@ package app;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+import app.Image;
 
 public class Main {
 
@@ -17,6 +15,7 @@ public class Main {
         List<Image> horizontalPics = new ArrayList<>();
         List<Image> verticalPics = new ArrayList<>();
         List<Image> slideshow = new ArrayList<>();
+        Map<String, Integer> priorities = new HashMap<>();
 
         URL path = Main.class.getResource("../files/a_example.txt");
         File file = new File(path.getPath());
@@ -26,6 +25,7 @@ public class Main {
 
         int nrOfHorizontalPics = 0;
         int nrOfVerticalPics = 0;
+        int priority = 0;
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] s = line.split(" ");
@@ -41,10 +41,17 @@ public class Main {
                 nrOfVerticalPics++;
                 verticalPics.add(img);
             }
+
+            for(String tag : img.getTags()) {
+                if(!priorities.containsKey(tag)) {
+                    priorities.put(tag, priority++);
+                }
+            }
         }
         int nrOfTotalSlides = nrOfHorizontalPics + (nrOfVerticalPics)/2;
 
         System.out.println(verticalPics);
+        System.out.println(priorities);
     }
 
     private static int calculateIntersectFactor(Image firstImage, Image secondImage) {
