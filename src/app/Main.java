@@ -59,6 +59,21 @@ public class Main {
             }
         }
 
+        System.out.println(priorities);
+        System.out.println(pics.size());
+
+        for(Image pic : pics) {
+            List<Integer> prs = new ArrayList<>();
+            for(String tag : pic.getTags()) {
+                int p = priorities.get(tag);
+                prs.add(p);
+            }
+
+            Collections.sort(prs);
+            pic.setTagPriorities(prs);
+        }
+
+        System.out.println(pics);
 
     }
 
