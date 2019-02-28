@@ -13,7 +13,7 @@ public class Main {
         List<Image> slideshow = new ArrayList<>();
         Map<String, Integer> priorities = new HashMap<>();
 
-        URL path = Main.class.getResource("../files/a_example.txt");
+        URL path = Main.class.getResource("../files/e_shiny_selfies.txt");
         File file = new File(path.getPath());
         Scanner scanner = new Scanner(file);
 
@@ -37,9 +37,8 @@ public class Main {
                 }
             }
         }
-
         Image firstVerticalPic = null;
-        for (int i = 0; i < numberOfPictures - 1; i++) {
+        for (int i = 0; i < pics.size() - 1; i++) {
             Image currentImage = pics.get(i);
             if (firstVerticalPic == null && currentImage.getOrientation() == 'V') {
                 firstVerticalPic = currentImage;
@@ -48,13 +47,10 @@ public class Main {
                 pics.add(image);
                 pics.remove(firstVerticalPic);
                 pics.remove(currentImage);
+                firstVerticalPic = null;
             }
         }
 
-        System.out.println(priorities);
-        System.out.println(pics.size());
-
-        // compute and replace priorities
         for(Image pic : pics) {
             List<Integer> prs = new ArrayList<>();
             for(String tag : pic.getTags()) {
@@ -66,17 +62,14 @@ public class Main {
             pic.setTagPriorities(prs);
         }
 
-        System.out.println(pics);
-
         pics.sort((o1, o2) -> {
             int f1 = o1.getTagPriorities().get(0);
             int f2 = o2.getTagPriorities().get(0);
 
             return Integer.compare(f1, f2);
         });
-
-        System.out.println(pics);
-
+        System.out.println(pics.size());
+        pics.forEach(System.out::println);
     }
 
     private static int calculateIntersectFactor(Image firstImage, Image secondImage) {
