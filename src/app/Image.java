@@ -6,11 +6,15 @@ public class Image {
     private char orientation;
     private int numberOfTags;
     private List<String> tags;
+    private List<Integer> outputIndex;
+    private List<Integer> tagPriorities;
 
-    public Image(char orientation, int numberOfTags, List<String> tags) {
+    public Image(char orientation, int numberOfTags, List<String> tags, List<Integer> outputIndex, List<Integer> tagPriorities) {
         this.orientation = orientation;
         this.numberOfTags = numberOfTags;
         this.tags = tags;
+        this.outputIndex = outputIndex;
+        this.tagPriorities = tagPriorities;
     }
 
     public char getOrientation() {
@@ -37,12 +41,30 @@ public class Image {
         this.tags = tags;
     }
 
+    public List<Integer> getOutputIndex() {
+        return outputIndex;
+    }
+
+    public void setOutputIndex(List<Integer> outputIndex) {
+        this.outputIndex = outputIndex;
+    }
+
+    public List<Integer> getTagPriorities() {
+        return tagPriorities;
+    }
+
+    public void setTagPriorities(List<Integer> tagPriorities) {
+        this.tagPriorities = tagPriorities;
+    }
+
     @Override
     public String toString() {
         return "Image{" +
                 "orientation=" + orientation +
                 ", numberOfTags=" + numberOfTags +
                 ", tags=" + tags +
+                ", outputIndex=" + outputIndex +
+                ", tagPriorities=" + tagPriorities +
                 '}';
     }
 }
