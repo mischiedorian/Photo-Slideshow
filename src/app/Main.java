@@ -62,6 +62,7 @@ public class Main {
         System.out.println(priorities);
         System.out.println(pics.size());
 
+        // compute and replace priorities
         for(Image pic : pics) {
             List<Integer> prs = new ArrayList<>();
             for(String tag : pic.getTags()) {
