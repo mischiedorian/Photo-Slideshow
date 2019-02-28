@@ -1,16 +1,19 @@
+package app;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-
 
     public static void main(String[] args) throws FileNotFoundException {
         int currentCounter = 0;
@@ -44,17 +47,18 @@ public class Main {
         }
 
         Image firstVerticalPic = null;
-        for (int i = 0; i < numberOfPictures; i++) {
+        for (int i = 0; i < numberOfPictures - 1; i++) {
             Image currentImage = pics.get(i);
             if (firstVerticalPic == null && currentImage.getOrientation() == 'V') {
                 firstVerticalPic = currentImage;
-            } else if(currentImage.getOrientation() == 'V') {
+            } else if (currentImage.getOrientation() == 'V') {
                 Image image = mergeTwoVerticalImages(firstVerticalPic, currentImage);
                 pics.add(image);
                 pics.remove(firstVerticalPic);
                 pics.remove(currentImage);
             }
         }
+
 
     }
 
@@ -87,7 +91,8 @@ public class Main {
         HashSet<String> bothListsTags = new HashSet<>();
         bothListsTags.addAll(firstImage.getTags());
         bothListsTags.addAll(secondImage.getTags());
-        List<Integer> currentOutputIndex = firstImage.getOutputIndex();
+        List<Integer> currentOutputIndex = new ArrayList<>();
+        currentOutputIndex.addAll(firstImage.getOutputIndex());
         currentOutputIndex.addAll(secondImage.getOutputIndex());
 
         return new Image('H', bothListsTags.size(), new ArrayList<>(bothListsTags),
