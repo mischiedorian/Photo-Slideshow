@@ -14,7 +14,8 @@ public class Main {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        List<Image> images = new ArrayList<>();
+        List<Image> horizontalPics = new ArrayList<>();
+        List<Image> verticalPics = new ArrayList<>();
 
         URL path = Main.class.getResource("../files/a_example.txt");
         File file = new File(path.getPath());
@@ -31,16 +32,19 @@ public class Main {
             String numberOfTags = s[1];
             ArrayList<String> currentTags = new ArrayList<>(Arrays.asList(s).subList(2, s.length));
             char orient = orientation.toCharArray()[0];
+            Image img = new Image(orient, Integer.valueOf(numberOfTags), currentTags);
             if(orient == 'H') {
                 nrOfHorizontalPics++;
+                horizontalPics.add(img);
             } else {
                 nrOfVerticalPics++;
+                verticalPics.add(img);
             }
-            images.add(new Image(orient, Integer.valueOf(numberOfTags), currentTags));
         }
         int nrOfTotalSlides = nrOfHorizontalPics + (nrOfVerticalPics)/2;
 
-        System.out.println(images);
+        System.out.println(horizontalPics);
+        System.out.println(verticalPics);
         System.out.println(nrOfTotalSlides);
     }
 }
