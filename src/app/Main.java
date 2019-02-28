@@ -48,16 +48,21 @@ public class Main {
         System.out.println(nrOfTotalSlides);
     }
 
-    private static int getNumberOfCommonElements(List<String> array1, List<String> array2) {
+    private static int getNumberOfCommonTags(Image firstImage, Image secondImage) {
         int numberOfCommonElements = 0;
 
-        LinkedHashSet<String> strings = new LinkedHashSet<>(array1);
-        LinkedHashSet<String> moreStrings = new LinkedHashSet<>(array2);
+        LinkedHashSet<String> strings = new LinkedHashSet<>(firstImage.getTags());
+        LinkedHashSet<String> moreStrings = new LinkedHashSet<>(secondImage.getTags());
 
         for(String string: strings) {
             if (!moreStrings.add(string))
                 numberOfCommonElements++;
         }
         return numberOfCommonElements;
+    }
+
+    private static int getNumberOfDifferencesBetweenLists(List<String> array1, List<String> array2) {
+        array1.removeAll(array2);
+        return array1.size();
     }
 }
