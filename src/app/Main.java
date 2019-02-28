@@ -3,15 +3,7 @@ package app;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -73,6 +65,15 @@ public class Main {
             Collections.sort(prs);
             pic.setTagPriorities(prs);
         }
+
+        System.out.println(pics);
+
+        Collections.sort(pics, (o1, o2) -> {
+            int f1 = o1.getTagPriorities().get(0);
+            int f2 = o2.getTagPriorities().get(0);
+
+            return Integer.compare(f1,f2);
+        });
 
         System.out.println(pics);
 
