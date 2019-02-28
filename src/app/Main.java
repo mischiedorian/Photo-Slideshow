@@ -68,11 +68,11 @@ public class Main {
 
         System.out.println(pics);
 
-        Collections.sort(pics, (o1, o2) -> {
+        pics.sort((o1, o2) -> {
             int f1 = o1.getTagPriorities().get(0);
             int f2 = o2.getTagPriorities().get(0);
 
-            return Integer.compare(f1,f2);
+            return Integer.compare(f1, f2);
         });
 
         System.out.println(pics);
