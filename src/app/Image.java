@@ -59,12 +59,11 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Image{" +
-                "orientation=" + orientation +
-                ", numberOfTags=" + numberOfTags +
-                ", tags=" + tags +
-                ", outputIndex=" + outputIndex +
-                ", tagPriorities=" + tagPriorities +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (Integer value : outputIndex) {
+            builder.append(value);
+            builder.append(" ");
+        }
+        return builder.toString();
     }
 }
