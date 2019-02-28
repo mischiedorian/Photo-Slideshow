@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         List<Image> horizontalPics = new ArrayList<>();
         List<Image> verticalPics = new ArrayList<>();
+        List<Image> slideshow = new ArrayList<>();
 
         URL path = Main.class.getResource("../files/a_example.txt");
         File file = new File(path.getPath());
@@ -43,9 +44,14 @@ public class Main {
         }
         int nrOfTotalSlides = nrOfHorizontalPics + (nrOfVerticalPics)/2;
 
-        System.out.println(horizontalPics);
         System.out.println(verticalPics);
-        System.out.println(nrOfTotalSlides);
+    }
+
+    private static int calculateIntersectFactor(Image firstImage, Image secondImage) {
+        int firstIndice = getNumberOfCommonTags(firstImage, secondImage);
+        int secondIndice = getNumberOfDifferencesBetweenLists(firstImage.getTags(), secondImage.getTags());
+        int thirdIndice = getNumberOfDifferencesBetweenLists(secondImage.getTags(), firstImage.getTags());
+        return Math.max(Math.max(firstIndice, secondIndice), thirdIndice);
     }
 
     private static int getNumberOfCommonTags(Image firstImage, Image secondImage) {
