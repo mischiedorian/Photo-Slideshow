@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
-import app.Image;
 import java.util.Scanner;
 
 public class Main {
@@ -46,5 +46,18 @@ public class Main {
         System.out.println(horizontalPics);
         System.out.println(verticalPics);
         System.out.println(nrOfTotalSlides);
+    }
+
+    private static int getNumberOfCommonElements(List<String> array1, List<String> array2) {
+        int numberOfCommonElements = 0;
+
+        LinkedHashSet<String> strings = new LinkedHashSet<>(array1);
+        LinkedHashSet<String> moreStrings = new LinkedHashSet<>(array2);
+
+        for(String string: strings) {
+            if (!moreStrings.add(string))
+                numberOfCommonElements++;
+        }
+        return numberOfCommonElements;
     }
 }
