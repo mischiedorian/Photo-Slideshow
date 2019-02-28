@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -70,5 +71,13 @@ public class Main {
     private static int getNumberOfDifferencesBetweenLists(List<String> array1, List<String> array2) {
         array1.removeAll(array2);
         return array1.size();
+    }
+
+    private static Image mergeTwoVerticalImages(Image firstImage, Image secondImage) {
+        HashSet<String> bothListsTags = new HashSet<>();
+        bothListsTags.addAll(firstImage.getTags());
+        bothListsTags.addAll(secondImage.getTags());
+
+        return new Image('H', bothListsTags.size(), new ArrayList<>(bothListsTags));
     }
 }
